@@ -6,7 +6,7 @@ const startButton = document.querySelector('.start-button');
 let alienInterval;
 
 //função de movimento e tiro da nave
-function flyAhip(event) {
+function flyShip(event) {
     if (event.key === 'ArrowUp') {
         event.preventDefault();
         moveUp();
@@ -116,7 +116,7 @@ function moveAlien(alien) {
 //função de colisão e morte dos monstros
 function checkLaserCollision(laser, alien) {
     let laserTop = parseInt(laser.style.top);
-    let laserLeft = parent(laser.style.left);
+    let laserLeft = parseInt(laser.style.left);
     let laserBottom = laserTop - 20;
     let alienTop = parseInt(alien.style.top);
     let alienLeft = parseInt(alien.style.left);
@@ -128,7 +128,7 @@ function checkLaserCollision(laser, alien) {
             return false;
         }
     } else {
-        return false
+        return false;
     }
 }
 
@@ -140,7 +140,7 @@ startButton.addEventListener('click', (event) => {
 function playGame() {
     startButton.style.display = 'none';
     instructionsText.style.display = 'none';
-    window.addEventListener('keydown', flyAhip);
+    window.addEventListener('keydown', flyShip);
     alienInterval = setInterval(() => {
         createAliens();
     }, 2000);
@@ -148,7 +148,7 @@ function playGame() {
 
 //função de game over
 function gameOver() {
-    window.removeEventListener('keydown', flyAhip);
+    window.removeEventListener('keydown', flyShip);
     clearInterval(alienInterval);
     let aliens = document.querySelectorAll('.alien');
     aliens.forEach((alien) => alien.remove());
